@@ -6,6 +6,7 @@ use App\Http\Controllers\TipCalculatorController;
 use App\Http\Controllers\PasswordGeneratorController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\NoteController;
 
 Route::get('/', function () {
     return view('layouts.app');
@@ -38,4 +39,10 @@ Route::prefix('reservas')->name('reservations.')->controller(ReservationControll
     Route::get('/', 'index')->name('index');
     Route::post('/crear', 'store')->name('store');
     Route::delete('/{reservation}', 'destroy')->name('destroy');
+});
+
+Route::prefix('notas')->name('notes.')->controller(App\Http\Controllers\NoteController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/crear', 'store')->name('store');
+    Route::delete('/{note}', 'destroy')->name('destroy');
 });

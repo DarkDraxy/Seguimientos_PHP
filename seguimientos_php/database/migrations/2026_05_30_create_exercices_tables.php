@@ -40,6 +40,15 @@ return new class extends Migration
             $table->unique(['date', 'slot','service']);
         });
 
+        Schema::create('notes', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->string ('category');
+            $table->timestamps();
+        });
+
+
 
     }
 
