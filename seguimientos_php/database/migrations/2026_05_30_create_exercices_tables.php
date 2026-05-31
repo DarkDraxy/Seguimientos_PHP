@@ -48,6 +48,16 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('events', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->date('date');
+            $table->string('time', 5);
+            $table->text('description')->nullable();
+            $table->boolean('reminder')->default(false);
+            $table->timestamps();
+        });
+
 
 
     }
@@ -60,5 +70,7 @@ return new class extends Migration
         Schema::dropIfExists('tasks');
         Schema::dropIfExists('expenses');
         Schema::dropIfExists('reservations');
+        Schema::dropIfExists('notes');
+        Schema::dropIfExists('events');
     }
 };

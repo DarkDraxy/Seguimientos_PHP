@@ -7,6 +7,7 @@ use App\Http\Controllers\PasswordGeneratorController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\EventController;
 
 Route::get('/', function () {
     return view('layouts.app');
@@ -45,4 +46,11 @@ Route::prefix('notas')->name('notes.')->controller(App\Http\Controllers\NoteCont
     Route::get('/', 'index')->name('index');
     Route::post('/crear', 'store')->name('store');
     Route::delete('/{note}', 'destroy')->name('destroy');
+});
+
+Route::prefix('eventos')->name('events.')->controller(App\Http\Controllers\EventController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/crear', 'store')->name('store');
+    Route::patch('/{event}', 'update')->name('update');
+    Route::delete('/{event}', 'destroy')->name('destroy');
 });
