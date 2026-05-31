@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TipCalculatorController;
+use App\Http\Controllers\PasswordGeneratorController;
 
 Route::get('/', function () {
     return view('layouts.app');
@@ -12,4 +14,14 @@ Route::prefix('tareas')->name('tasks.')->controller(TaskController::class)->grou
     Route::post('/', 'store')->name('store');
     Route::patch('/{task}/toggle', 'toggle')->name('toggle');
     Route::delete('/{task}', 'destroy')->name('destroy');
+});
+
+Route::prefix('propinas')->name('tips.')->controller(TipCalculatorController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/calcular', 'calculate')->name('calculate');
+});
+
+Route::prefix('contraseñas')->name('passwords.')->controller(PasswordGeneratorController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/generar', 'generate')->name('generate');
 });
