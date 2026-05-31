@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TipCalculatorController;
 use App\Http\Controllers\PasswordGeneratorController;
+use App\Http\Controllers\ExpenseController;
 
 Route::get('/', function () {
     return view('layouts.app');
@@ -24,4 +25,10 @@ Route::prefix('propinas')->name('tips.')->controller(TipCalculatorController::cl
 Route::prefix('contraseñas')->name('passwords.')->controller(PasswordGeneratorController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/generar', 'generate')->name('generate');
+});
+
+Route::prefix('gastos')->name('expenses.')->controller(ExpenseController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/registrar', 'store')->name('store');
+    Route::delete('/{expense}', 'destroy')->name('destroy');
 });
