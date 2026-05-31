@@ -5,6 +5,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TipCalculatorController;
 use App\Http\Controllers\PasswordGeneratorController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ReservationController;
 
 Route::get('/', function () {
     return view('layouts.app');
@@ -31,4 +32,10 @@ Route::prefix('gastos')->name('expenses.')->controller(ExpenseController::class)
     Route::get('/', 'index')->name('index');
     Route::post('/registrar', 'store')->name('store');
     Route::delete('/{expense}', 'destroy')->name('destroy');
+});
+
+Route::prefix('reservas')->name('reservations.')->controller(ReservationController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/crear', 'store')->name('store');
+    Route::delete('/{reservation}', 'destroy')->name('destroy');
 });

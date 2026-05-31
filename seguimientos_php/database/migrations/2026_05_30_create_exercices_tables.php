@@ -27,8 +27,18 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('reservations', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('service');
+            $table->string('service_name');
+            $table->date('date');
+            $table->string('slot', 5);
+            $table->boolean('confirmed')->default(true);
+            $table->timestamps();
 
-
+            $table->unique(['date', 'slot','service']);
+        });
 
 
     }
@@ -40,5 +50,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('tasks');
         Schema::dropIfExists('expenses');
+        Schema::dropIfExists('reservations');
     }
 };
