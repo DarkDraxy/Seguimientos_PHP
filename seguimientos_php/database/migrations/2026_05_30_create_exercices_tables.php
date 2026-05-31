@@ -58,6 +58,32 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('recipes', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('type');
+            $table->text('ingredients');
+            $table->text('instructions');
+            $table->string('author')->default('Usuario');
+            $table->timestamps();
+        });
+
+        Schema::create('surveys', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('question', 500);
+            $table->unsignedInteger('responses')->default(0);
+            $table->timestamps();
+        });
+
+        Schema::create('survey_options', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('survey_id')->constrained()->cascadeOnDelete();
+            $table->string('text');
+            $table->unsignedInteger('votes')->default(0);
+            $table->timestamps();
+        });
+
 
 
     }
